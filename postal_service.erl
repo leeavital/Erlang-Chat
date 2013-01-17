@@ -12,7 +12,15 @@ loop(Connected) ->
          loop(Connected ++ [Client]);
       
       {send_all, Message} ->
-         io:format("sending ~p to everyone", [Message]);
+         io:format("sending ~p to everyone", [Message]),
+         send_all(Message, Connected),
+         loop(Connected);
       _ ->
          io:format("received an unknown\n")
    end.
+
+
+send_all( _, []) -> ok;
+send_all(Message, [H|T]) ->
+   gen_tcp:send(H, Message),
+   send_all(Message, T).

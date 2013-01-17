@@ -1,7 +1,7 @@
 -module(chat_main).
 -export([start/0]).
 
--define(TCP_OPTIONS, [binary, {packet, 2}, {active, false}, {reuseaddr, true}]).
+-define(TCP_OPTIONS, [binary, {packet, 0}, {active, false}, {reuseaddr, true}]).
 -define(PORT, 5483).
 
 
@@ -13,7 +13,7 @@ start() ->
 
 
 loop(Server, PPostalService) ->
-   cse gen_tcp:accept(Server) of
+   case gen_tcp:accept(Server) of
       {ok, Client} -> 
          io:format("recieved a client\n"),
          PPostalService ! {add_client, Client},
