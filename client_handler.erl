@@ -15,7 +15,6 @@ loop(Client, PPostalService) ->
          PPostalService ! {send_all, Message},
          loop(Client, PPostalService);    
       {error, Message} -> 
-         io:format("there was an error receiving the message ~p\n", [Message]),
-         loop(Client, PPostalService)
+         io:format("there was a connection error: ~p, we are disconnecting this client", [Message])
   end. 
     
