@@ -5,15 +5,19 @@
 -define(PORT, 5483).
 
 
+% get a server socket and start looping with it.
 start() -> 
    {ok, ServerSocket} = gen_tcp:listen(?PORT, ?TCP_OPTIONS),
-   loop(ServerSocket).
+   loop(ServerSocket, spawn(postal_service, start, [])).
 
 
 
-loop(Server) ->
+loop(Server, PPostalService) ->
    case gen_tcp:accept(Server) of
-
+      {ok, Client} -> 
+         io:format("recieved a client"),
+         PPostalService ! {add_client, Client},
+         loop(Server, PPostalService);
       _ ->
          io:format("recieved\n")
    end.
