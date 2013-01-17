@@ -4,8 +4,13 @@
 from socket import *
 import threading
 
-socket = socket(AF_INET, SOCK_STREAM)
-socket.connect(("localhost", 5483))
+sock = socket(AF_INET, SOCK_STREAM)
+sock.connect(("localhost", 5483))
 
+
+
+while True:
+   s = raw_input("enter a string")
+   sock.send(s)
 
   

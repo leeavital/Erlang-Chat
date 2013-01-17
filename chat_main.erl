@@ -13,9 +13,9 @@ start() ->
 
 
 loop(Server, PPostalService) ->
-   case gen_tcp:accept(Server) of
+   cse gen_tcp:accept(Server) of
       {ok, Client} -> 
-         io:format("recieved a client"),
+         io:format("recieved a client\n"),
          PPostalService ! {add_client, Client},
          loop(Server, PPostalService);
       _ ->

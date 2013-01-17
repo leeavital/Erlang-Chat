@@ -1,3 +1,5 @@
+all: main postal_service client_handler
+
 main: chat_main.erl
 	 erlc chat_main.erl
 	 
