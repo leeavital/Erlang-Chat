@@ -3,6 +3,7 @@
 
 start( Client, PPostalService ) ->
   io:format("starting a client_handler\n"),
+  gen_tcp:send(Client, ok),
   loop( Client, PPostalService ). 
   
   
