@@ -2,7 +2,14 @@
 -export([start/0]).
 
 
+% when we start, there is no one connected
 start() -> loop([]).
+
+
+% this prcess does not handle any TCP,
+% rather it receives message from the main 
+% server loop and the client_handlers.
+% Connected : a list of connected clients (a list of sockets)
 loop(Connected) ->
    receive 
       {add_client, Client} ->
@@ -20,7 +27,11 @@ loop(Connected) ->
    end.
 
 
+
+% send a message to all of the connected clients
 send_all( _, []) -> ok;
+
+% Message : (sring) the message to send
 send_all(Message, [H|T]) ->
    gen_tcp:send(H, Message),
    send_all(Message, T).

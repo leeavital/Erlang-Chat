@@ -1,12 +1,21 @@
 -module(client_handler).
 -export([start/2]).
 
+
+
+% start a client hanlder
+% Client :  a client socket
+% PPOstalService : the process that will send messages
+%  to all the other connected clients
 start( Client, PPostalService ) ->
   io:format("starting a client_handler\n"),
   gen_tcp:send(Client, ok),
   loop( Client, PPostalService ). 
   
-  
+
+
+% loop while receiveing from the client
+% same arguments as above 
 loop(Client, PPostalService) -> 
   io:format("looping inside client_handler`\n"),
   case gen_tcp:recv(Client, 0) of 

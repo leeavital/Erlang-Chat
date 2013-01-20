@@ -1,6 +1,9 @@
 -module(chat_main).
 -export([start/0]).
 
+
+
+% definitions for TCP connections
 -define(TCP_OPTIONS, [binary, {packet, 0}, {active, false}, {reuseaddr, true}]).
 -define(PORT, 5483).
 
@@ -12,6 +15,10 @@ start() ->
 
 
 
+% this is the main loop
+% Server : a server socket that will accept incoming connections
+% PPostalService : a process that will handle adding clients to the 
+%  connection pool
 loop(Server, PPostalService) ->
    case gen_tcp:accept(Server) of
       {ok, Client} -> 
