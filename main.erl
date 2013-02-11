@@ -3,5 +3,5 @@
 
 % starts the main chat loop
 main( _ ) ->
-
-   chat_main:start().
+    test:get_person(),
+    chat_main:start().
