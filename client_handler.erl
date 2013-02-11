@@ -1,7 +1,7 @@
 -module(client_handler).
 -export([start/2]).
 
-
+-include("client_info.hrl").
 
 % start a client hanlder
 % Client :  a client socket
