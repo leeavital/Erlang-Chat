@@ -1,6 +1,5 @@
 Erlang Simple Chat
-##################
-
+==================
 
 A simple multiclient chat server written in erlang.
 
@@ -15,7 +14,8 @@ run client.py
 
 
 Running
-#######
+=======
+
 
 To run, start the main erlang file like so:
 
@@ -25,3 +25,9 @@ To run, start the main erlang file like so:
 Open another terminal window, and launch the python client
 
     ./client.py
+
+When in the client program, you can type anything and it will be sent as a message.
+
+To change your name, type
+
+    NAME=Your Name
