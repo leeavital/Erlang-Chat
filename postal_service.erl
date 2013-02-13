@@ -2,6 +2,8 @@
 -export([start/0]).
 
 
+-include("client_info.hrl").
+
 % when we start, there is no one connected
 start() -> loop([]).
 
@@ -18,9 +20,9 @@ loop(Connected) ->
          io:format("spawned\n"),
          loop(Connected ++ [Client]);
       
-      {send_all, Message} ->
+      {send_all, User, Message} ->
          io:format("sending ~p to everyone", [Message]),
-         send_all(Message, Connected),
+         send_all(User, Message, Connected),
          loop(Connected);
       _ ->
          io:format("received an unknown\n")
@@ -29,9 +31,9 @@ loop(Connected) ->
 
 
 % send a message to all of the connected clients
-send_all( _, []) -> ok;
+send_all( _, _, []) -> ok;
 
 % Message : (sring) the message to send
-send_all(Message, [H|T]) ->
-   gen_tcp:send(H, Message),
-   send_all(Message, T).
+send_all(User, Message, [H|T]) ->
+   gen_tcp:send(H, User#user.name ++ ": " ++ Message),
+   send_all(User, Message, T).

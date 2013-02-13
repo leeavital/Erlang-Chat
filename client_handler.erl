@@ -34,7 +34,7 @@ loop(Client, PPostalService, User) ->
                 % if we can't find anything to parse, treat 
                 % it as a new message
                 _ -> 
-                    PPostalService ! {send_all, Message},
+                    PPostalService ! {send_all, User, Message},
                     loop(Client, PPostalService, User)
             end;
 
