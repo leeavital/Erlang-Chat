@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	
+	<target name="all" depends="jar">
+		
+	</target>
+	
+    <target name="clean">
+        <delete dir="build" />
+        <delete dir="dist"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/" />
+        <javac srcdir="src" destdir="build/" />
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="dist/" />
+        <jar destfile="dist/client.jar" basedir="build/">
+            <manifest>
+                <attribute name="Main-Class" value="main.Main" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="dist/client.jar" fork="true"/>
+    </target>
+
+</project>
