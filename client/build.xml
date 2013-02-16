@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project default="jar">
 	
 	<target name="all" depends="jar">
-		
 	</target>
 	
     <target name="clean">
