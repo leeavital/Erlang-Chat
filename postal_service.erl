@@ -41,5 +41,6 @@ send_all( _, _, []) -> ok;
 % User : (#user) the user that sent the Message
 % Message : (sring) the message to send
 send_all(User, Message, [H|T]) ->
-   gen_tcp:send(H, User#user.name ++ ": " ++ Message),
+   io:format("sending ~p to ~p\n", [Message, H]),
+   gen_tcp:send(H, User#user.name ++ ": " ++ Message ++ "\n"),
    send_all(User, Message, T).
